@@ -1,0 +1,26 @@
+<!--
+
+visiting http://localhost:3000
+would display a list of input boxes
+populated by product names...
+as you change a name, it changes the name
+value in the database
+
+notes:
+
+ - the initial list is rendered on the server
+ - `products.count()` returns a promise => displayed as a number
+ - `$scope.products.limit(100)` returns a cursor/promise => ng-each iterates the cursor
+
+-->
+
+<div ng-ctrl="Products">
+  <strong>Total: {{ products.count() }} </strong>
+  <ul>
+    <li ng-each="product in products.limit(100)">
+      <span fng-error />
+      <input ng-if="$me.hasRole('admin')" type="text" ng-model="product.name" />
+      <strong ng-if="$me.notRole('admin')"> {{ name }} </strong>
+    </li>
+  </ul>
+</div>
